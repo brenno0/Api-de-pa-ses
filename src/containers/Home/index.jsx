@@ -1,6 +1,19 @@
-import { Flex, Text, Input, Button, FormLabel, Stack  }  from '@chakra-ui/react'
+import { useState } from 'react'
+import { Flex, Input, Button, FormLabel, Stack  }  from '@chakra-ui/react'
+import { useNavigate  } from "react-router-dom";
 import classes from './home.scss'
 export const Home = () => {
+  const history =  useNavigate();
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+
+  const authenticate = () => {
+    if(email === "admin" && password === "123"){
+      history('/paises')
+    }
+  }
+  
+  
     return (
         <Flex 
         w="100vw"
@@ -24,26 +37,30 @@ export const Home = () => {
                 <Input 
                 name="email" 
                 type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 focusBorderColor="pink.500"
-                bgColor="gray.900" 
-                _hover={{
-                    bgColor:'gray.900'
+                bgColor="gray.600" 
+                _focus={{
+                    bgColor:'white'
                   }}
                 />
                 <FormLabel color="pink.400" htmlFor="password">senha</FormLabel>
                 <Input 
                 name="password" 
                 type="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 focusBorderColor="pink.500"
-                bgColor="gray.900" 
-                _hover={{
-                    bgColor:'gray.900'
+                bgColor="gray.600" 
+                _focus={{
+                    bgColor:'white'
                   }}
                 />
                 <Button  
                 gap="10px" 
+                onClick={authenticate}
                 colorScheme="pink"
-                colorScheme='pink' 
                 variant='solid'
                 color="white" 
                 className={classes.buttonCenter}>

@@ -1,4 +1,4 @@
-import { axiosBaseAdm, axiosBaseSso } from "./createAxiosBase";
+import { axiosBaseAdm } from "./createAxiosBase";
 
 class AxiosBaseClass {
   /*

@@ -8,14 +8,12 @@ export const Countries = () => {
 
     const [countryInfo,setCountryInfo] = useState([]);
     const [loading, setLoading] = useState(false)
-    const [status, setStatus] = useState()
     const searchCountries = (name) => {
         if(name.length === 0){
             setCountryInfo([])
         }
         CountriesApi.country(name)
         .then((data) => {
-        console.log(data)
         if(data.data.status !== 404){
             setCountryInfo(data.data);
         }else{
