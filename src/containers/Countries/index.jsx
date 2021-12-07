@@ -16,8 +16,6 @@ export const Countries = () => {
     const [countryInfo,setCountryInfo] = useState([]);
     const [loading, setLoading] = useState(false)
     const [isFavorite, setIsFavorite ] = useState(false);
-    const [countryIndex, setCountryIndex ] = useState();
-    const loggedIn = useStoreState(({ user }) => user.loggedIn);
     const setFavorite = useStoreState(({ user }) => user.setFavorite);
     
     useEffect(() => {
@@ -41,7 +39,7 @@ export const Countries = () => {
             CountriesApi.country(name)
             .then((data) => {
             if(data.data.status !== 404){
-                console.log('loggedIn',loggedIn)
+                // console.log('loggedIn',loggedIn)
                 const favoriteData = data.data.map(favorite => {
                     return {
                         ...favorite,
@@ -49,7 +47,8 @@ export const Countries = () => {
                     }
                 })
                 setCountryInfo(favoriteData);
-                console.log('countryInfo',countryInfo)
+                setFavorite(favoriteData);
+                // console.log('countryInfo',countryInfo)
             }else{
                 setCountryInfo([])
             }
@@ -169,7 +168,7 @@ export const Countries = () => {
                                     <IconButton aria-label='Favorite item' onClick={(event,newValue) => {
 
                                     setIsFavorite(!isFavorite)
-                                    console.log('country',country)
+                                    // console.log('country',country)
 
                                 }} 
                                 variant="outline"
