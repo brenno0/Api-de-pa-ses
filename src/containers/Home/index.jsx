@@ -1,15 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useToast } from '@chakra-ui/react'
+import { useStoreActions } from 'easy-peasy'
 import { Flex, Input, Button, FormLabel, Stack  }  from '@chakra-ui/react'
 import { useNavigate  } from "react-router-dom";
 import classes from './home.scss'
+
 export const Home = () => {
+  const toast = useToast();
   const history =  useNavigate();
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const setLoggedIn = useStoreActions(({ user }) => user.setLoggedIn);
 
+
+
+  useEffect(() => {
+    setLoggedIn(false)
+  },[])
   const authenticate = () => {
     if(email === "admin" && password === "123"){
       history('/paises')
+      setLoggedIn(true)
+    
+      toast({
+        title: 'Login realizado com sucesso.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+    })
     }
   }
   
@@ -45,7 +63,7 @@ export const Home = () => {
                     bgColor:'white'
                   }}
                 />
-                <FormLabel color="pink.400" htmlFor="password">senha</FormLabel>
+                <FormLabel color="pink.400" htmlFor="password">Senha</FormLabel>
                 <Input 
                 name="password" 
                 type="password" 
