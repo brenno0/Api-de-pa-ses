@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 import { useNavigate  } from "react-router-dom";
 import { Flex,Input,Icon, Image,Container, Text,Box, CircularProgress, IconButton } from '@chakra-ui/react';
 import { RiSearchLine } from 'react-icons/ri';
@@ -16,6 +16,7 @@ export const Countries = () => {
     const [countryInfo,setCountryInfo] = useState([]);
     const [loading, setLoading] = useState(false)
     const [isFavorite, setIsFavorite ] = useState(false);
+    const loggedIn = useStoreState(({ user }) => user.loggedIn);
     const setFavorite = useStoreState(({ user }) => user.setFavorite);
     
     useEffect(() => {
@@ -29,7 +30,7 @@ export const Countries = () => {
                 isClosable: true,
             })
         }
-    },[])
+    })
     
     const searchCountries = (name) => {
         if(loggedIn === true){

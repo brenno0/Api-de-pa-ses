@@ -16,7 +16,7 @@ export const Home = () => {
 
   useEffect(() => {
     setLoggedIn(false)
-  },[])
+  })
   const authenticate = () => {
     if(email === "admin" && password === "123"){
       history('/paises')
